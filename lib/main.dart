@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       initialData: InternetConnectionStatus.connected,
       child: const MaterialApp(
         title: 'Connection Checker',
+        debugShowCheckedModeBanner: false,
         home: MyHome(),
       ),
     );
