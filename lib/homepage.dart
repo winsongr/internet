@@ -21,29 +21,34 @@ class _MyHomeState extends State<MyHome> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Visibility(
-              visible: Provider.of<InternetConnectionStatus>(context) ==
-                  InternetConnectionStatus.disconnected,
-              child: InternetNotAvail(),
-            ),
-            Provider.of<InternetConnectionStatus>(context) == InternetConnectionStatus.disconnected
-                ? Expanded(
-                    child: Center(
-                    child: Text(
-                      'no connection',
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                  ))
+            // Visibility(
+            //   visible: Provider.of<InternetConnectionStatus>(context) ==
+            //       InternetConnectionStatus.disconnected,
+            //   child: InternetNotAvail(),
+            // ),
+            Provider.of<InternetConnectionStatus>(context) ==
+                    InternetConnectionStatus.disconnected
+                ? const InternetNotAvail()
                 : Expanded(
-                    child: Center(
+                  child: Center(
                     child: Text(
                       'connected',
                       style: Theme.of(context).textTheme.headline4,
                     ),
-                  ))
+                  ),
+                ),
           ],
         ),
       ),
     );
   }
 }
+
+// Expanded(
+//                     child: Center(
+//                       child: Text(
+//                         'no connection',
+//                         style: Theme.of(context).textTheme.headline4,
+//                       ),
+//                     ),
+//                   )
