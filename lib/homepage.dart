@@ -41,9 +41,7 @@ class _MyHomeState extends State<MyHome> {
               Provider.of<InternetConnectionStatus>(context) ==
                       InternetConnectionStatus.disconnected
                   ? const DetailScreen()
-                  : Connected(
-                      controllerCenter: _controllerCenter,
-                    ),
+                  : Connected(),
             ],
           ),
         ),
@@ -52,14 +50,25 @@ class _MyHomeState extends State<MyHome> {
   }
 }
 
-class Connected extends StatelessWidget {
-  const Connected({
+class Connected extends StatefulWidget {
+  Connected({
     Key? key,
-    required ConfettiController controllerCenter,
-  })  : _controllerCenter = controllerCenter,
-        super(key: key);
+  }) : super(key: key);
 
-  final ConfettiController _controllerCenter;
+  @override
+  State<Connected> createState() => _ConnectedState();
+}
+
+class _ConnectedState extends State<Connected> {
+  late ConfettiController _controllerCenter;
+
+  @override
+  void initState() {
+    _controllerCenter =
+        ConfettiController(duration: const Duration(seconds: 10));
+    _controllerCenter.play();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +80,6 @@ class Connected extends StatelessWidget {
             child: Text(
               'connected',
               style: Theme.of(context).textTheme.headline4,
-              
             ),
           ),
           ConfettiWidget(
